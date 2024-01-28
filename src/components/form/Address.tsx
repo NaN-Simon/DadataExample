@@ -13,6 +13,7 @@ const formSchema = z.object({
 
 const Address = () => {
   const [value, setValue] = useState<DaDataSuggestion<DaDataAddress> | undefined>()
+  const [partOfFile, setPartOfFile] = useState('')
   const [changedValue, setChangedValue] = useState('')
   const [step, setStep] = useState(1)
   const key = '2395f8adc307ea077d978592cede9be81665712d'
@@ -33,6 +34,7 @@ const Address = () => {
       flat: dadata.data.flat
     }
     const validatedDadata = Object.values(result).filter(value => value !== '' && value !== null && value !== undefined).join(", ")
+    setPartOfFile(JSON.stringify(result))
     setChangedValue(validatedDadata)
     return validatedDadata;
   }
@@ -43,7 +45,7 @@ const Address = () => {
   }
 
   const addToLocalStorage = () => {
-    localStorage.setItem('address', changedValue)
+    localStorage.setItem('address', partOfFile)
   }
 
   const removeLocalStorage = () => {
